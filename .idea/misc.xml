@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/activity_main2.xml" value="0.25" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/activity_socket_demo.xml" value="0.25" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/dialog_beizhu.xml" value="0.25" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/dialog_time.xml" value="0.25" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/fragment_outcome.xml" value="0.25" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/item_recordfrag_gv.xml" value="0.25" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/mian_item_lv.xml" value="0.2453125" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/mian_top_tab.xml" value="0.2453125" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/drawable/dialog_beizhu_bg.xml" value="0.1" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/drawable/main_ib_bg.xml" value="0.20564102564102565" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/drawable/mian_et_bg.xml" value="0.20564102564102565" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/layout/activity_main2.xml" value="0.1" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/layout/activity_socket_demo.xml" value="0.13645833333333332" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/layout/dialog_beizhu.xml" value="0.18" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/layout/dialog_time.xml" value="0.25" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/layout/fragment_outcome.xml" value="0.33" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/layout/item_lv.xml" value="0.16847826086956522" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/layout/item_recordfrag_gv.xml" value="0.1" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/layout/key.xml" value="0.18885869565217392" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/layout/mian_item_lv.xml" value="0.1" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/layout/mian_top_tab.xml" value="0.1" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.18125" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.18125" />
+        <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/xml/key.xml" value="0.18885869565217392" />
+      </map>
+    </option>
+  </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="jbr-11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--梵高-->
+    <color name="blue_0191B3">#0191B3</color>
+    <color name="blue_3FB4CF">#3FB4CF</color>
+    <color name="white_EEE5AD">#EEE5AD</color>
+    <color name="orange_EABF6F">#EABF6F</color>
+    <color name="green_929455">#929455</color>
+    
+    <color name="gray_7D7D7D">#7D7D7D</color>
+
+    <!--百香水蜜桃-->
+    <color name="yellow_F9C889">#F9C889</color>
+    <color name="yellow_FCAA80">#FCAA80</color>
+    <color name="yellow_FD9C02">#FD9C02</color>
+    <color name="yellow_F3D805">#F3D805</color>
+
+
+</resources>
