@@ -83,4 +83,104 @@ public class DBManger {
         return list;
     }
 
+    /*
+    * 获取某一天的支出或者收入的总金额 kind:支出==0, 收入==1
+    * */
+
+    @SuppressLint("Range")
+    public static float getSumMoneyOneday(int year, int month, int day, int kind){
+        float total = 0.0f;
+        String sql = "select sum(money) from accounttb where year=? and month=? and day=? and kind=?";
+        Cursor cursor = db.rawQuery(sql,new String[]{year+"",month+"",day+"",kind+""});
+        //遍历
+        if (cursor.moveToFirst()){
+
+          float money =  cursor.getFloat(cursor.getColumnIndex("sum(money)"));
+          total = money;
+        }
+        return total;
+    }
+
+
+    //获取某一个月的支出或者收入的总金额 kind:支出==0, 收入==1
+    @SuppressLint("Range")
+    public static float getSumMoneyMonth(int year, int month, int kind){
+        float total = 0.0f;
+        String sql = "select sum(money) from accounttb where year=? and month=? and kind=?";
+        Cursor cursor = db.rawQuery(sql,new String[]{year+"",month+"",kind+""});
+        //遍历
+        if (cursor.moveToFirst()){
+
+            float money =  cursor.getFloat(cursor.getColumnIndex("sum(money)"));
+            total = money;
+        }
+        return total;
+    }
+
+    //获取某一年的支出或者收入的总金额 kind:支出==0, 收入==1
+    @SuppressLint("Range")
+    public static float getSumMoneyYear(int year, int kind){
+        float total = 0.0f;
+        String sql = "select sum(money) from accounttb where year=? and kind=?";
+        Cursor cursor = db.rawQuery(sql,new String[]{year+"",kind+""});
+        //遍历
+        if (cursor.moveToFirst()){
+
+            float money =  cursor.getFloat(cursor.getColumnIndex("sum(money)"));
+            total = money;
+
+        }
+        return total;
+    }
+
+
+    /*
+    * 根据传入的id，删除accountdb表中的一条数据
+    * */
+
+
+    public static int deleteItemFromAccounttbById(int id){
+
+        int i = db.delete("accounttb","id=?",new String[]{id+""});
+        return i;
+
+    }
+
+
+    /**
+     * @description: 根据备注搜索收入或者支出的情况列表
+     * @author LINZHENGZ
+     * @date 2023/12/26 11:44
+     * @version 1.0
+     **/
+
+    @SuppressLint("Range")
+    public static List<AccountBean>getAccountListListByRemarkFromAccounttb(String beizhu){
+
+        List<AccountBean> list = new ArrayList<>();
+        String sql = "select * from accounttb where beizhu like '%"+beizhu+"%'";
+        Cursor cursor = db.rawQuery(sql,null);
+
+        while (cursor.moveToNext()){
+
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String typename = cursor.getString(cursor.getColumnIndex("typename"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
+            int kind = cursor.getInt(cursor.getColumnIndex("kind"));
+            float money = cursor.getFloat(cursor.getColumnIndex("money"));
+
+            int year = cursor.getInt(cursor.getColumnIndex("year"));
+            int month = cursor.getInt(cursor.getColumnIndex("month"));
+            int day = cursor.getInt(cursor.getColumnIndex("day"));
+
+            AccountBean accountBean = new AccountBean(id, typename, sImageId, beizhu, money, time, year, month, day, kind);
+            list.add(accountBean);
+
+        }
+
+        return list;
+    }
+
+
 }

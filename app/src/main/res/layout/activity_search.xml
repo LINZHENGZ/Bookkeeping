@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".SearchActivity">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        <ImageView
+                android:id="@+id/search_iv_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="onClick"
+                android:src="@mipmap/returnicon"
+                tools:ignore="OnClick"
+                android:layout_marginLeft="10dp"/>
+
+        <EditText
+                android:id="@+id/search_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/search_iv_back"
+                android:background="@drawable/dialog_beizhu_bg"
+                android:textSize="16sp"
+                android:layout_centerVertical="true"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="10dp"
+                android:hint="@string/please_search_info">
+            <requestFocus/>
+        </EditText>
+
+
+        <ImageView
+                android:id="@+id/search_iv_sh"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/sousuo"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:onClick="onClick" tools:ignore="OnClick"/>
+    </RelativeLayout>
+
+    <ListView
+            android:id="@+id/search_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="6dp"
+            android:divider="@color/white_EEE5AD"
+            android:visibility="gone"/>
+
+    <TextView
+            android:id="@+id/search_tv_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/date_empty"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:drawableTop="@mipmap/filenull"
+            android:paddingTop="300dp"/>
+
+
+
+
+
+</LinearLayout>

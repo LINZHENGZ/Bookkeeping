@@ -36,6 +36,7 @@ public class RecordActivity extends AppCompatActivity {
         OutcomeFragment outFrag = new OutcomeFragment();        //支出
 
         IncomeFragment inFrag = new IncomeFragment();          //收入
+
         fragmentList.add(outFrag);
         fragmentList.add(inFrag);
 

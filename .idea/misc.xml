@@ -3,15 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/drawable/dialog_beizhu_bg.xml" value="0.26614583333333336" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/drawable/main_ib_bg.xml" value="0.26614583333333336" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/drawable/mian_et_bg.xml" value="0.26614583333333336" />
         <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/activity_main2.xml" value="0.25" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/activity_search.xml" value="0.25" />
         <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/activity_socket_demo.xml" value="0.25" />
         <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/dialog_beizhu.xml" value="0.25" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/dialog_budge.xml" value="0.2" />
         <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/dialog_time.xml" value="0.25" />
         <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/fragment_outcome.xml" value="0.25" />
         <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/item_recordfrag_gv.xml" value="0.25" />
         <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/mian_item_lv.xml" value="0.2453125" />
         <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/mian_top_tab.xml" value="0.2453125" />
+        <entry key="..\:/ARoidLin_technology/A_Project_RoidLin/Bookkeepingbook/app/src/main/res/layout/more.xml" value="0.21614583333333334" />
         <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/drawable/dialog_beizhu_bg.xml" value="0.1" />
         <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/drawable/main_ib_bg.xml" value="0.20564102564102565" />
