@@ -66,8 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button add = findViewById(R.id.main_btn_add);
         add.setOnClickListener(this);
 
-        //长按删除
-        setLvLongClickListener();
+
 
     }
 
@@ -83,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchTv.setOnClickListener(this);
 
 
+        //长按删除
+        setLvLongClickListener();
+
     }
 
 
@@ -97,13 +99,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 int pos = position - 1 ;
-                AccountBean clickBean = mDatas.get(pos);        //获取正在被点击的这条信息
+
+                //获取正在被点击的这条信息
+                AccountBean clickBean = mDatas.get(pos);
 
                 //弹出提示用户是否删除的方法
                 showDelectItemDialog(clickBean);
 
-
                 return false;
+
             }
         });
 
@@ -112,9 +116,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void addLVHeaderView() {
+
         //将布局转换成View对象
         headerView = getLayoutInflater().inflate(R.layout.mian_top_tab, null);
         todayLv.addHeaderView(headerView);  //添加头布局
+
         //查找头布局可用控件
         topOutTv =headerView.findViewById(R.id.main_top_tab_out);
         topInTv = headerView.findViewById(R.id.main_top_tab_tv2);
@@ -210,7 +216,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void showDelectItemDialog(AccountBean clickBean){
+    //删除记录的对话框
+    private void showDelectItemDialog(final AccountBean clickBean){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("提示信息")

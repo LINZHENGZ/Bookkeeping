@@ -54,6 +54,7 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
         setCVListener();                                         //设置每一项的点击事件
         setInitTime();
         return view;
+
     }
     /*
     * 获取当前的事件，显示在timeTv上

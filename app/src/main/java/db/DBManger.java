@@ -63,6 +63,7 @@ public class DBManger {
         values.put("kind",bean.getKind());
         db.insert("accounttb",null,values);
     }
+
     @SuppressLint("Range")
     public static List<AccountBean>getAccountListOneDayFromAccounttb(int year,int month,int day){
         List<AccountBean>list = new ArrayList<>();
