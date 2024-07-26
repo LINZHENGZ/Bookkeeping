@@ -13,6 +13,12 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.BookkeepingBook">
         <activity
+                android:name=".HistoryActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".aboutActivity"
+                android:exported="true"/>
+        <activity
                 android:name=".SearchActivity"
                 android:exported="true"/>
         <activity

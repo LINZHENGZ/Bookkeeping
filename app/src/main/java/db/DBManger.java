@@ -18,21 +18,26 @@ import java.util.List;
 
 public class DBManger {
 
-    private  static SQLiteDatabase db;
+    private static SQLiteDatabase db;
 
     public static void initDB(Context context){
+
         DBOpenHelper helper = new DBOpenHelper(context);
         db = helper.getWritableDatabase();
+
     }
 
 
     @SuppressLint("Range")
     public static List<TypeBean>getTypeList(int kind) {
+
         List<TypeBean>list = new ArrayList<>();
-        String sql = "select * from typetb where kind = "+kind;
+        String sql = "select * from typetb where kind = " + kind;
         Cursor cursor = db.rawQuery(sql,null);
+
         //循环游标
         while(cursor.moveToNext()){
+
             String typename = cursor.getString(cursor.getColumnIndex("typename"));
             int imageId = cursor.getInt(cursor.getColumnIndex("imageid"));
             int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
@@ -41,6 +46,7 @@ public class DBManger {
 
             TypeBean typeBean = new TypeBean(id,typename,imageId,sImageId,kind1);
             list.add(typeBean);
+
         }
 
         return list;
@@ -51,6 +57,7 @@ public class DBManger {
     * 向表里插入一条元素
     * */
     public static void insertItemToAccounttb(AccountBean bean){
+
         ContentValues values = new ContentValues();
         values.put("typename",bean.getTypename());
         values.put("sImageId",bean.getsImageId());
@@ -62,16 +69,21 @@ public class DBManger {
         values.put("day",bean.getDay());
         values.put("kind",bean.getKind());
         db.insert("accounttb",null,values);
+
     }
+
 
     @SuppressLint("Range")
     public static List<AccountBean>getAccountListOneDayFromAccounttb(int year,int month,int day){
+
         List<AccountBean>list = new ArrayList<>();
         String sql = "select * from accounttb where year=? and month=? and day=? order by id desc";
         Cursor cursor = db.rawQuery(sql, new String[]{year + "", month + "", day + ""});
+
         //遍历符合要求的每一行数据
         while (cursor.moveToNext()) {
-             int id = cursor.getInt(cursor.getColumnIndex("id"));
+
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
             String typename = cursor.getString(cursor.getColumnIndex("typename"));
             String beizhu = cursor.getString(cursor.getColumnIndex("beizhu"));
             String time = cursor.getString(cursor.getColumnIndex("time"));
@@ -80,9 +92,43 @@ public class DBManger {
             float money = cursor.getFloat(cursor.getColumnIndex("money"));
             AccountBean accountBean = new AccountBean(id, typename, sImageId, beizhu, money, time, year, month, day, kind);
             list.add(accountBean);
+
         }
+
         return list;
+
     }
+
+
+    @SuppressLint("Range")
+    public static List<AccountBean>getAccountListOnemonthFromAccounttb(int year,int month){
+
+        List<AccountBean>list = new ArrayList<>();
+        String sql = "select * from accounttb where year=? and month=?  order by id desc";
+        Cursor cursor = db.rawQuery(sql, new String[]{year + "", month + ""});
+
+        //遍历符合要求的每一行数据
+        while (cursor.moveToNext()) {
+
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String typename = cursor.getString(cursor.getColumnIndex("typename"));
+            String beizhu = cursor.getString(cursor.getColumnIndex("beizhu"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
+            int kind = cursor.getInt(cursor.getColumnIndex("kind"));
+            float money = cursor.getFloat(cursor.getColumnIndex("money"));
+            int day = cursor.getInt(cursor.getColumnIndex("day"));
+
+            AccountBean accountBean = new AccountBean(id, typename, sImageId, beizhu, money, time, year, month, day, kind);
+            list.add(accountBean);
+
+        }
+
+        return list;
+
+    }
+
+
 
     /*
     * 获取某一天的支出或者收入的总金额 kind:支出==0, 收入==1

@@ -35,13 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SharedPreferences preferences;
 
 
-    //获取当前时间
-    private void initTime(){
-        Calendar calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH)+1;
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +81,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    //获取当前时间
+    private void initTime(){
+        Calendar calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH)+1;
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+    }
 
     //设置ListView长按事件
     private void setLvLongClickListener(){
@@ -174,14 +175,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else {
 
             float syMonet = bmoney - outcomeOneday;
-            topbudgetTv.setText("￥"+syMonet);
+            topbudgetTv.setText("预算余额：￥"+syMonet);
 
         }
-
-
-
-
-
 
     }
 
@@ -204,14 +200,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //计算剩余金额
                 float outComeOneMorth = DBManger.getSumMoneyMonth(year,month,0);
-                float syMoney = money - outComeOneMorth; //预算剩余 = 预算 - 输出
+                //预算剩余 = 预算 - 输出
+                float syMoney = money - outComeOneMorth;
                 topbudgetTv.setText("￥"+syMoney);
-
 
 
             }
         });
-
 
 
     }
@@ -222,8 +217,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("提示信息")
                .setMessage("您确定要删除这条记录吗?")
-                .setNegativeButton("取消",null)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+               .setNegativeButton("取消",null)
+               .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -235,12 +230,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         adapter.notifyDataSetChanged();     //提示适配器更新数据
                         setTopTvshow();                     //改变头布局的信息
 
-
                     }
+
                 });
 
-
-            builder.create().show();
+        builder.create().show();
 
     }
 
@@ -251,12 +245,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         switch (v.getId()){
-
             case R.id.main_iv_search:
-
                 Intent it1 = new Intent(this,SearchActivity.class);
                 startActivity(it1);
-
             break;
 
             //加一笔
@@ -271,7 +262,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 moreDialog.setDialogSize();
                 break;
             case R.id.item_mainlv_top_tv_in:
-
                 showBudgetDialog();
                 break;
 
@@ -279,9 +269,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //切换TextView明文或者密文
                 toggleShow();
                 break;
+
         }
 
         if (v == headerView){
+
+
 
         }
     }
@@ -290,8 +283,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean isShow = true;
     private void toggleShow(){
 
-        if (isShow){      //明文→密文
+        if (isShow){
 
+            //明文→密文
             PasswordTransformationMethod passwordTransformationMethod = PasswordTransformationMethod.getInstance();
             //设置隐藏
             topInTv.setTransformationMethod(passwordTransformationMethod);

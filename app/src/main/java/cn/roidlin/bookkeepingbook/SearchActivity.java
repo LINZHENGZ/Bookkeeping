@@ -65,13 +65,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
                 //开始搜索
                 List<AccountBean> list = DBManger.getAccountListListByRemarkFromAccounttb(msg);
+
+                mDatas.clear();
                 mDatas.addAll(list);
                 adapter.notifyDataSetChanged();
 
-
                 break;
-
-
 
         }
 

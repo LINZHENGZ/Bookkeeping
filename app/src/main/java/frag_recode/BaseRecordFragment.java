@@ -51,7 +51,8 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
         View view = inflater.inflate(R.layout.fragment_outcome, container, false);
         initView(view);
         loadDataToGv();
-        setCVListener();                                         //设置每一项的点击事件
+        //设置每一项的点击事件
+        setGVListener();
         setInitTime();
         return view;
 
@@ -77,14 +78,17 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
 
     }
 
-    private void setCVListener(){
+    private void setGVListener(){
                 typeGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                        TypeBaseAdapter adapter = new TypeBaseAdapter(getContext(), typeList);
+                        //TypeBaseAdapter adapter = new TypeBaseAdapter(getContext(), typeList);    这里不该重新new 对象
+
                         adapter.selectPos = position;
-                        adapter.notifyDataSetInvalidated();                            //提示绘制发生变化
+
+                        //提示绘制发生变化
+                        adapter.notifyDataSetInvalidated();
                         TypeBean typeBean = typeList.get(position);
                         String typename = typeBean.getTypename();
                         typeTv.setText(typename);
@@ -151,9 +155,9 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
     public void onClick(View v) {
 
             switch (v.getId()){
+
                 case R.id.frag_record_tv_time:
                     showTimedialog();
-
                     break;
                 case R.id.frag_record_tv_beizu:
                     showBZdialog();

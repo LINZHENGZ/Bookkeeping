@@ -1,13 +1,18 @@
 package utils;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.Button;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import cn.roidlin.bookkeepingbook.R;
+
+
+import cn.roidlin.bookkeepingbook.aboutActivity;
 
 /**
  * @author LINZHENGZ
@@ -50,10 +55,15 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
+        Intent intent = new Intent();
 
         switch (v.getId()){
 
             case R.id.dialog_more_btn_about:
+
+                intent.setClass(getContext(),aboutActivity.class);
+                getContext().startActivity(intent);
+
                 break;
             case R.id.dialog_more_btn_setting:
                 break;

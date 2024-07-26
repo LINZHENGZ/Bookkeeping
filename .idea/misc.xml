@@ -36,7 +36,19 @@
         <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.18125" />
         <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.18125" />
         <entry key="..\:/RoidLin_technology/Bookkeepingbook/app/src/main/res/xml/key.xml" value="0.18885869565217392" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/activity_about.xml" value="0.28072916666666664" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/activity_history.xml" value="0.21" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/activity_main.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/activity_main2.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/activity_search.xml" value="0.1393110435663627" />
         <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/activity_socket_demo.xml" value="0.33125" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/dialog_budge.xml" value="0.1393110435663627" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/dialog_calendar.xml" value="0.22554347826086957" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/dialog_more.xml" value="0.17291666666666666" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/fragment_outcome.xml" value="0.1393110435663627" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/item_dialogcal_gv_tv.xml" value="0.22554347826086957" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/item_recordfrag_gv.xml" value="0.1393110435663627" />
+        <entry key="..\:/Users/10351/Desktop/Bookkeeping/app/src/main/res/layout/mian_top_tab.xml" value="0.33" />
       </map>
     </option>
   </component>
