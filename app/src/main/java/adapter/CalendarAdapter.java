@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import cn.roidlin.bookkeepingbook.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CalendarAdapter extends BaseAdapter {
@@ -24,7 +25,6 @@ public class CalendarAdapter extends BaseAdapter {
         mDatas.clear();
         loadDatas(year);
 
-
     }
 
     private void loadDatas(int year) {
@@ -34,6 +34,14 @@ public class CalendarAdapter extends BaseAdapter {
             mDatas.add(data);
         }
 
+    }
+
+    public CalendarAdapter(Context context, int year) {
+        this.context = context;
+        this.year = year;
+
+        mDatas = new ArrayList<>();
+        loadDatas(year);
     }
 
     @Override

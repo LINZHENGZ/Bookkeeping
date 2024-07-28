@@ -100,6 +100,7 @@ public class DBManger {
     }
 
 
+    //获取某一个月的收支情况
     @SuppressLint("Range")
     public static List<AccountBean>getAccountListOnemonthFromAccounttb(int year,int month){
 
@@ -228,6 +229,25 @@ public class DBManger {
 
         return list;
     }
+
+    /*
+    * 查询记账的表当中有几个年份的信息
+    * */
+
+    @SuppressLint("Range")
+    public static List<Integer> getYearListFromAccounttb(){
+
+        List<Integer> list = new ArrayList<>();
+        String sql = "select distinct(year) from accounttb order by year asc";
+        Cursor cursor = db.rawQuery(sql,null);
+        while (cursor.moveToNext()){
+          int year = cursor.getInt(cursor.getColumnIndex("year"));
+          list.add(year);
+        }
+        return list;
+    }
+
+
 
 
 }

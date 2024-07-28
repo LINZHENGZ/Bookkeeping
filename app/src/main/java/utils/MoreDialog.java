@@ -9,6 +9,7 @@ import android.view.*;
 import android.widget.Button;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
+import cn.roidlin.bookkeepingbook.HistoryActivity;
 import cn.roidlin.bookkeepingbook.R;
 
 
@@ -61,17 +62,26 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
 
             case R.id.dialog_more_btn_about:
 
+                //关于
                 intent.setClass(getContext(),aboutActivity.class);
                 getContext().startActivity(intent);
 
                 break;
+
             case R.id.dialog_more_btn_setting:
+
                 break;
             case R.id.dialog_more_btn_record:
+
+                intent.setClass(getContext(), HistoryActivity.class);
+                getContext().startActivity(intent);
+
                 break;
             case R.id.dialog_more_btn_info:
+
                 break;
             case R.id.dialog_more_iv:
+
                 break;
 
 

@@ -2,8 +2,10 @@ package cn.roidlin.bookkeepingbook;
 
 import adapter.AccountAdapter;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
@@ -11,12 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import db.AccountBean;
 import db.DBManger;
+import utils.CalenderDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class HistoryActivity extends AppCompatActivity {
+public class HistoryActivity extends AppCompatActivity implements View.OnClickListener{
 
     ListView historyLv;
     TextView timeTv;
@@ -26,6 +29,9 @@ public class HistoryActivity extends AppCompatActivity {
 
     int year,month;
 
+    int dialogSelPos = -1;
+    int dialogSelMonth = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +40,14 @@ public class HistoryActivity extends AppCompatActivity {
         historyLv = findViewById(R.id.history_lv);
         timeTv = findViewById(R.id.history_tv_time);
 
+
         //设置适配器
         mDatas = new ArrayList<>();
         adapter = new AccountAdapter(this,mDatas);
         historyLv.setAdapter(adapter);
         initTime();
         timeTv.setText(year + "年" + month + "月");
-        loadData();
+        loadData(year,month);
 
         setLVClickListener();
 
@@ -86,7 +93,7 @@ public class HistoryActivity extends AppCompatActivity {
 
 
     //获取指定年份月份收支情况的列表
-    private void loadData() {
+    private void loadData(int year,int month) {
 
             List<AccountBean> list = DBManger.getAccountListOnemonthFromAccounttb(year,month);
             mDatas.clear();
@@ -109,17 +116,29 @@ public class HistoryActivity extends AppCompatActivity {
 
         switch (view.getId()){
 
-            case R.id.abount_iv_back:
+            case R.id.history_iv_back:
                 finish();
                 break;
 
             case R.id.history_iv_rili:
 
+                CalenderDialog dialog = new CalenderDialog(this,dialogSelPos,dialogSelMonth);
+                dialog.show();
+                dialog.setDialogSize();
+                dialog.setOnRefreshListener(new CalenderDialog.OnRefreshListener() {
+                    @Override
+                    public void onRefresh(int selPos, int year, int month) {
+
+                        timeTv.setText(year + "年" + month+"月");
+                        loadData(year,month);
+                        dialogSelPos = selPos;
+                        dialogSelMonth = month;
+
+                    }
+                });
+
 
                 break;
-
-
-
 
         }
 
