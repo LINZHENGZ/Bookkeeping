@@ -132,6 +132,31 @@ public class CalenderDialog extends Dialog implements View.OnClickListener {
         }
 
         changeTvbg(selectPos);
+        setHSVClickListener();
+
+    }
+
+    private void setHSVClickListener() {
+
+        for (int i = 0;i<hsvViewList.size();i++){
+
+            TextView view = hsvViewList.get(i);
+            final int pos = i;
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    changeTvbg(pos);
+                    selectPos = pos;
+                    //获取被选中的年份，然后下面显示
+                    int year = yearList.get(selectPos);
+                    adapter.setYear(year);
+
+
+                }
+            });
+
+
+        }
 
     }
 

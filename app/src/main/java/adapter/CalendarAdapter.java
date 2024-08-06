@@ -19,7 +19,6 @@ public class CalendarAdapter extends BaseAdapter {
     public int year;
     public int selPos = -1;
 
-
     public void setYear(int year) {
         this.year = year;
         mDatas.clear();
