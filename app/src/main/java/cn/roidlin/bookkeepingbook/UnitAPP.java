@@ -1,7 +1,9 @@
 package cn.roidlin.bookkeepingbook;
 
 import android.app.Application;
-import db.DBManger;
+import cn.roidlin.bookkeepingbook.data.DBManger;
+import cn.roidlin.bookkeepingbook.data.repository.BookkeepingRepository;
+import cn.roidlin.bookkeepingbook.data.repository.LocalBookkeepingRepository;
 
 /**
  * @author LINZHENGZ
@@ -10,10 +12,18 @@ import db.DBManger;
  */
 
 public class UnitAPP extends Application {
+    private static BookkeepingRepository repository;
+
+    public static BookkeepingRepository getRepository() {
+        return repository;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
-        //初始化数据库
+        // 初始化数据库与本地数据仓库
         DBManger.initDB(getApplicationContext());
+        repository = new LocalBookkeepingRepository();
     }
 }
+

@@ -1,6 +1,6 @@
 package cn.roidlin.bookkeepingbook;
 
-import adapter.AccountAdapter;
+import cn.roidlin.bookkeepingbook.ui.adapter.AccountAdapter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,8 +9,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import db.AccountBean;
-import db.DBManger;
+import cn.roidlin.bookkeepingbook.UnitAPP;
+import cn.roidlin.bookkeepingbook.data.AccountBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     ListView searchLv;
     EditText searchEt;
     TextView emptyTv;
-    List<AccountBean> mDatas;   //数据源
-    AccountAdapter adapter;     //适配器对象
+    List<AccountBean> mDatas;   //鏁版嵁婧?
+    AccountAdapter adapter;     //閫傞厤鍣ㄥ璞?
 
 
     @Override
@@ -35,7 +35,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         mDatas = new ArrayList<>();
         adapter = new AccountAdapter(this,mDatas);
         searchLv.setAdapter(adapter);
-        searchLv.setEmptyView(emptyTv);     //设置无限布局
+        searchLv.setEmptyView(emptyTv);     //璁剧疆鏃犻檺甯冨眬
 
     }
 
@@ -57,14 +57,14 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
             case R.id.search_iv_sh:
                 String msg = searchEt.getText().toString().trim();
-                //判断输入内容是否为空,如果为空，就提示不能搜索
+                // 输入为空时，提示后直接返回
                 if (TextUtils.isEmpty(msg)){
                     Toast.makeText(this,"输入内容不能为空",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                //开始搜索
-                List<AccountBean> list = DBManger.getAccountListListByRemarkFromAccounttb(msg);
+                //寮€濮嬫悳绱?
+                List<AccountBean> list = UnitAPP.getRepository().searchAccountsByRemark(msg);
 
                 mDatas.clear();
                 mDatas.addAll(list);

@@ -1,14 +1,14 @@
 package cn.roidlin.bookkeepingbook;
 
-import adapter.RecordPagerAdater;
+import cn.roidlin.bookkeepingbook.ui.adapter.RecordPagerAdater;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
-import frag_recode.IncomeFragment;
-import frag_recode.OutcomeFragment;
+import cn.roidlin.bookkeepingbook.ui.record.IncomeFragment;
+import cn.roidlin.bookkeepingbook.ui.record.OutcomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +33,9 @@ public class RecordActivity extends AppCompatActivity {
     private void initPager() {
         List<Fragment> fragmentList = new ArrayList<>();
 
-        OutcomeFragment outFrag = new OutcomeFragment();        //支出
+        OutcomeFragment outFrag = new OutcomeFragment();        //鏀嚭
 
-        IncomeFragment inFrag = new IncomeFragment();          //收入
+        IncomeFragment inFrag = new IncomeFragment();          //鏀跺叆
 
         fragmentList.add(outFrag);
         fragmentList.add(inFrag);

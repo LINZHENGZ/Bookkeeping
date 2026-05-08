@@ -1,6 +1,6 @@
 package cn.roidlin.bookkeepingbook;
 
-import adapter.AccountAdapter;
+import cn.roidlin.bookkeepingbook.ui.adapter.AccountAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
@@ -11,9 +11,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import db.AccountBean;
-import db.DBManger;
-import utils.CalenderDialog;
+import cn.roidlin.bookkeepingbook.UnitAPP;
+import cn.roidlin.bookkeepingbook.data.AccountBean;
+import cn.roidlin.bookkeepingbook.ui.common.CalendarDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,7 +41,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         timeTv = findViewById(R.id.history_tv_time);
 
 
-        //设置适配器
+        //璁剧疆閫傞厤鍣?
         mDatas = new ArrayList<>();
         adapter = new AccountAdapter(this,mDatas);
         historyLv.setAdapter(adapter);
@@ -73,14 +73,14 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
 
         final int delId = accountBean.getId();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("提示信息").setMessage("您确定要删除这条记录么？")
+        builder.setTitle("提示信息").setMessage("确定要删除这条记录吗？")
                 .setNegativeButton("取消",null)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
 
-                        DBManger.deleteItemFromAccounttbById(delId);
-                        mDatas.remove(accountBean); //实时刷新，从数据源删除
+                        UnitAPP.getRepository().deleteAccountById(delId);
+                        mDatas.remove(accountBean); //瀹炴椂鍒锋柊锛屼粠鏁版嵁婧愬垹闄?
                         adapter.notifyDataSetChanged();
 
 
@@ -92,10 +92,10 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    //获取指定年份月份收支情况的列表
+    //鑾峰彇鎸囧畾骞翠唤鏈堜唤鏀舵敮鎯呭喌鐨勫垪琛?
     private void loadData(int year,int month) {
 
-            List<AccountBean> list = DBManger.getAccountListOnemonthFromAccounttb(year,month);
+            List<AccountBean> list = UnitAPP.getRepository().getAccountsByMonth(year, month);
             mDatas.clear();
             mDatas.addAll(list);
             adapter.notifyDataSetChanged();
@@ -122,14 +122,14 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
 
             case R.id.history_iv_rili:
 
-                CalenderDialog dialog = new CalenderDialog(this,dialogSelPos,dialogSelMonth);
+                CalendarDialog dialog = new CalendarDialog(this,dialogSelPos,dialogSelMonth);
                 dialog.show();
                 dialog.setDialogSize();
-                dialog.setOnRefreshListener(new CalenderDialog.OnRefreshListener() {
+                dialog.setOnRefreshListener(new CalendarDialog.OnRefreshListener() {
                     @Override
                     public void onRefresh(int selPos, int year, int month) {
 
-                        timeTv.setText(year + "年" + month+"月");
+                        timeTv.setText(year + "年" + month + "月");
                         loadData(year,month);
                         dialogSelPos = selPos;
                         dialogSelMonth = month;

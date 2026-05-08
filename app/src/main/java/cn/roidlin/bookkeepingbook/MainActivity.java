@@ -1,6 +1,6 @@
 package cn.roidlin.bookkeepingbook;
 
-import adapter.AccountAdapter;
+import cn.roidlin.bookkeepingbook.ui.adapter.AccountAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,10 +12,9 @@ import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import db.AccountBean;
-import db.DBManger;
-import utils.BudgetDialog;
-import utils.MoreDialog;
+import cn.roidlin.bookkeepingbook.data.AccountBean;
+import cn.roidlin.bookkeepingbook.ui.common.BudgetDialog;
+import cn.roidlin.bookkeepingbook.ui.common.MoreDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,7 +22,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    ListView todayLv;       //展示今日收支情况
+    ListView todayLv;       //灞曠ず浠婃棩鏀舵敮鎯呭喌
     List<AccountBean> mDatas;
     AccountAdapter adapter;
     int year,month,day;
@@ -50,11 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mDatas = new ArrayList<>();
 
-        //设置适配器: 加载每一行数据到列表中
+        //璁剧疆閫傞厤鍣? 鍔犺浇姣忎竴琛屾暟鎹埌鍒楄〃涓?
         adapter = new AccountAdapter(this,mDatas);
         todayLv.setAdapter(adapter);
 
-        //添加头布局
+        //娣诲姞澶村竷灞€
         addLVHeaderView();
 
         Button add = findViewById(R.id.main_btn_add);
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    //初始化自带的View的方法
+    //鍒濆鍖栬嚜甯︾殑View鐨勬柟娉?
     private void initView() {
         todayLv = findViewById(R.id.mian_lv);
         editBtn = findViewById(R.id.main_btn_add);
@@ -76,12 +75,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchTv.setOnClickListener(this);
 
 
-        //长按删除
+        //闀挎寜鍒犻櫎
         setLvLongClickListener();
 
     }
 
-    //获取当前时间
+    //鑾峰彇褰撳墠鏃堕棿
     private void initTime(){
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         day = calendar.get(Calendar.DAY_OF_MONTH);
     }
 
-    //设置ListView长按事件
+    //璁剧疆ListView闀挎寜浜嬩欢
     private void setLvLongClickListener(){
         todayLv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -101,10 +100,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 int pos = position - 1 ;
 
-                //获取正在被点击的这条信息
+                //鑾峰彇姝ｅ湪琚偣鍑荤殑杩欐潯淇℃伅
                 AccountBean clickBean = mDatas.get(pos);
 
-                //弹出提示用户是否删除的方法
+                //寮瑰嚭鎻愮ず鐢ㄦ埛鏄惁鍒犻櫎鐨勬柟娉?
                 showDelectItemDialog(clickBean);
 
                 return false;
@@ -118,11 +117,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void addLVHeaderView() {
 
-        //将布局转换成View对象
+        //灏嗗竷灞€杞崲鎴怴iew瀵硅薄
         headerView = getLayoutInflater().inflate(R.layout.mian_top_tab, null);
-        todayLv.addHeaderView(headerView);  //添加头布局
+        todayLv.addHeaderView(headerView);  //娣诲姞澶村竷灞€
 
-        //查找头布局可用控件
+        //鏌ユ壘澶村竷灞€鍙敤鎺т欢
         topOutTv =headerView.findViewById(R.id.main_top_tab_out);
         topInTv = headerView.findViewById(R.id.main_top_tab_tv2);
         topbudgetTv = headerView.findViewById(R.id.item_mainlv_top_tv_in);
@@ -145,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loadDBData() {
-        List<AccountBean> list = DBManger.getAccountListOneDayFromAccounttb(year,month,day);
+        List<AccountBean> list = UnitAPP.getRepository().getAccountsByDay(year, month, day);
         mDatas.clear();
         mDatas.addAll(list);
         adapter.notifyDataSetChanged();
@@ -153,35 +152,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setTopTvshow(){
 
-        //获取今日支出的收入总金额，显示在view当中
-        float incomeOneday = DBManger.getSumMoneyOneday(year,month,day,1);
-        float outcomeOneday = DBManger.getSumMoneyOneday(year,month,day,0);
+        //鑾峰彇浠婃棩鏀嚭鐨勬敹鍏ユ€婚噾棰濓紝鏄剧ず鍦╲iew褰撲腑
+        float incomeOneday = UnitAPP.getRepository().getSumMoneyOneday(year, month, day, 1);
+        float outcomeOneday = UnitAPP.getRepository().getSumMoneyOneday(year, month, day, 0);
 
-        String inforOneday = "今日支出 ￥"+outcomeOneday+"收入 ￥" + incomeOneday;
+        String inforOneday = "今日支出: " + outcomeOneday + " 收入: " + incomeOneday;
         topConTv.setText(inforOneday);
 
-        //获取本月收入和支出总金额
-        float incomeMonth = DBManger.getSumMoneyMonth(year,month,1);
-        float outcomeMonth = DBManger.getSumMoneyMonth(year,month,0);
-        topInTv.setText("本月收入￥"+incomeMonth);
-        topOutTv.setText("￥" + outcomeMonth);
+        //鑾峰彇鏈湀鏀跺叆鍜屾敮鍑烘€婚噾棰?
+        float incomeMonth = UnitAPP.getRepository().getSumMoneyMonth(year, month, 1);
+        float outcomeMonth = UnitAPP.getRepository().getSumMoneyMonth(year, month, 0);
+        topInTv.setText("本月收入: " + incomeMonth);
+        topOutTv.setText("本月支出: " + outcomeMonth);
 
-        //设置显示预算剩余
-        float bmoney = preferences.getFloat("bmoney",0);   //预算
+        //璁剧疆鏄剧ず棰勭畻鍓╀綑
+        float bmoney = preferences.getFloat("bmoney",0);   //棰勭畻
         if (bmoney == 0){
 
-            topbudgetTv.setText("￥ 0 ");
+            topbudgetTv.setText("预算余额: 0");
 
         }else {
 
             float syMonet = bmoney - outcomeOneday;
-            topbudgetTv.setText("预算余额：￥"+syMonet);
+                topbudgetTv.setText("预算余额: " + syMonet);
 
         }
 
     }
 
-    //显示运算设置对话框
+    //鏄剧ず杩愮畻璁剧疆瀵硅瘽妗?
     private void showBudgetDialog(){
 
         BudgetDialog dialog = new BudgetDialog(this);
@@ -198,11 +197,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 editor.putFloat("bmoney",money);
                 editor.commit();
 
-                //计算剩余金额
-                float outComeOneMorth = DBManger.getSumMoneyMonth(year,month,0);
-                //预算剩余 = 预算 - 输出
+                //璁＄畻鍓╀綑閲戦
+                float outComeOneMorth = UnitAPP.getRepository().getSumMoneyMonth(year, month, 0);
+                //棰勭畻鍓╀綑 = 棰勭畻 - 杈撳嚭
                 float syMoney = money - outComeOneMorth;
-                topbudgetTv.setText("￥"+syMoney);
+                topbudgetTv.setText("预算余额: " + syMoney);
 
 
             }
@@ -211,12 +210,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    //删除记录的对话框
+    //鍒犻櫎璁板綍鐨勫璇濇
     private void showDelectItemDialog(final AccountBean clickBean){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("提示信息")
-               .setMessage("您确定要删除这条记录吗?")
+               .setMessage("确定要删除这条记录吗？")
                .setNegativeButton("取消",null)
                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
@@ -224,11 +223,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         int click_id = clickBean.getId();
 
-                        //执行删除操作
-                        DBManger.deleteItemFromAccounttbById(click_id);
-                        mDatas.remove(clickBean);       //实时刷新
-                        adapter.notifyDataSetChanged();     //提示适配器更新数据
-                        setTopTvshow();                     //改变头布局的信息
+                        //鎵ц鍒犻櫎鎿嶄綔
+                        UnitAPP.getRepository().deleteAccountById(click_id);
+                        mDatas.remove(clickBean);       //瀹炴椂鍒锋柊
+                        adapter.notifyDataSetChanged();     //鎻愮ず閫傞厤鍣ㄦ洿鏂版暟鎹?
+                        setTopTvshow();                     //鏀瑰彉澶村竷灞€鐨勪俊鎭?
 
                     }
 
@@ -250,12 +249,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(it1);
             break;
 
-            //加一笔
+            //鍔犱竴绗?
             case R.id.main_btn_add:
-                Intent Main_Record = new Intent(MainActivity.this,RecordActivity.class);  //跳转界面
+                Intent Main_Record = new Intent(MainActivity.this,RecordActivity.class);  //璺宠浆鐣岄潰
                 startActivity(Main_Record);
                 break;
-            //更多
+            //鏇村
             case R.id.main_btn_more:
                 MoreDialog moreDialog = new MoreDialog(this);
                 moreDialog.show();
@@ -266,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.main_top_tab_hide:
-                //切换TextView明文或者密文
+                //鍒囨崲TextView鏄庢枃鎴栬€呭瘑鏂?
                 toggleShow();
                 break;
 
@@ -283,26 +282,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (isShow){
 
-            //明文→密文
+            //鏄庢枃鈫掑瘑鏂?
             PasswordTransformationMethod passwordTransformationMethod = PasswordTransformationMethod.getInstance();
-            //设置隐藏
+            //璁剧疆闅愯棌
             topInTv.setTransformationMethod(passwordTransformationMethod);
             topOutTv.setTransformationMethod(passwordTransformationMethod);
             topbudgetTv.setTransformationMethod(passwordTransformationMethod);
             topShowIv.setImageResource(R.mipmap.yincang);
 
-            isShow = false; //设置标志位为隐藏状态
+            isShow = false; //璁剧疆鏍囧織浣嶄负闅愯棌鐘舵€?
 
         }else {
 
             HideReturnsTransformationMethod hideReturnsTransformationMethod = HideReturnsTransformationMethod.getInstance();
-            //设置显示
+            //璁剧疆鏄剧ず
             topInTv.setTransformationMethod(hideReturnsTransformationMethod);
             topOutTv.setTransformationMethod(hideReturnsTransformationMethod);
             topbudgetTv.setTransformationMethod(hideReturnsTransformationMethod);
             topShowIv.setImageResource(R.mipmap.xianshi1);
 
-            isShow = true; //设置标志位为隐藏状态
+            isShow = true; //璁剧疆鏍囧織浣嶄负闅愯棌鐘舵€?
 
         }
 

@@ -16,13 +16,13 @@
                 android:name=".HistoryActivity"
                 android:exported="true"/>
         <activity
-                android:name=".aboutActivity"
+                android:name=".AboutActivity"
                 android:exported="true"/>
         <activity
                 android:name=".SearchActivity"
                 android:exported="true"/>
         <activity
-                android:name="Testing.SocketDemo"
+                android:name=".testing.SocketDemo"
                 android:exported="true"/>
         <activity
                 android:name=".RecordActivity"
