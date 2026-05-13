@@ -15,6 +15,7 @@ import cn.roidlin.bookkeepingbook.data.TypeBean;
 import cn.roidlin.bookkeepingbook.ui.common.KeyBoardUtils;
 import cn.roidlin.bookkeepingbook.ui.common.SelectTimeDialog;
 import cn.roidlin.bookkeepingbook.ui.common.BeizhuDialog;
+import cn.roidlin.bookkeepingbook.ui.common.ScreenAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -125,6 +126,9 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
         timeTv.setOnClickListener(this);
 
         // 显示自定义软键盘
+        // KeyboardView 属于代码里会直接调尺寸的 View，适合走统一适配工具类。
+        ScreenAdapter.applyViewHeight(keyboardView, 240f);
+        ScreenAdapter.applyTextSize(moneyEt, 24f);
         KeyBoardUtils boardUtils = new KeyBoardUtils(keyboardView,moneyEt);
         boardUtils.showKeyboard();
         // 设置确认监听

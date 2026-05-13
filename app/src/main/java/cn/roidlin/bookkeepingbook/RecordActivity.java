@@ -33,9 +33,9 @@ public class RecordActivity extends AppCompatActivity {
     private void initPager() {
         List<Fragment> fragmentList = new ArrayList<>();
 
-        OutcomeFragment outFrag = new OutcomeFragment();        //鏀嚭
+        OutcomeFragment outFrag = new OutcomeFragment();        // 支出
 
-        IncomeFragment inFrag = new IncomeFragment();          //鏀跺叆
+        IncomeFragment inFrag = new IncomeFragment();          // 收入
 
         fragmentList.add(outFrag);
         fragmentList.add(inFrag);

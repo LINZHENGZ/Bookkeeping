@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e6ccb6">
+
+    <RelativeLayout
+        android:id="@+id/mian_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/main_iv_search"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:padding="10dp"
+            android:src="@mipmap/sousuo" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/mian_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/mian_top_layout"
+        android:layout_marginTop="-4dp"
+        android:background="@color/white"
+        android:divider="@null"
+        android:dividerHeight="6dp"
+        android:padding="5dp"
+        android:scrollbars="none" />
+
+    <ImageButton
+        android:id="@+id/main_btn_more"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/main_ib_bg"
+        android:padding="15dp"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/more" />
+
+    <Button
+        android:id="@+id/main_btn_add"
+        android:layout_width="105dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@id/main_btn_more"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@id/main_btn_more"
+        android:background="@drawable/mian_et_bg"
+        android:drawableLeft="@mipmap/pencil1"
+        android:text="@string/tab_add_record"
+        android:textStyle="bold" />
+
+</RelativeLayout>

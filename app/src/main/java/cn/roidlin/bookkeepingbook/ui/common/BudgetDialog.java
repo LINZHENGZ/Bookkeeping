@@ -95,16 +95,8 @@ public class BudgetDialog extends Dialog implements View.OnClickListener {
     }
 
     public void setDialogSize(){
-        //鑾峰彇褰撳墠绐楀彛瀵硅薄
-        Window window = getWindow();
-        //鑾峰彇绐楀彛瀵硅薄鐨勫弬鏁?
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        //鑾峰彇灞忓箷瀹藉害
-        Display d = window.getWindowManager().getDefaultDisplay();
-        wlp.width = (int)d.getWidth();
-        wlp.gravity = Gravity.BOTTOM;
-        window.setBackgroundDrawableResource(android.R.color.transparent);
-        window.setAttributes(wlp);
+        // 预算弹窗保持底部样式，但在大屏上不再无限拉伸。
+        ScreenAdapter.applyBottomDialog(this, 0.92f, 360f);
         handler.sendEmptyMessageDelayed(1,100);
 
     }
@@ -118,4 +110,3 @@ public class BudgetDialog extends Dialog implements View.OnClickListener {
     };
 
 }
-

@@ -23,7 +23,7 @@ public class BeizhuDialog extends Dialog implements View.OnClickListener {
     Button cancelBtn,ensureBtn;
     OnEnsureListener onEnsureListener;
 
-    //璁惧畾鍥炶皟鎺ュ彛鐨勬柟娉?
+    // 设置回调接口
     public void setOnEnsureListener(OnEnsureListener onEnsureListener) {
         this.onEnsureListener = onEnsureListener;
     }
@@ -60,22 +60,14 @@ public class BeizhuDialog extends Dialog implements View.OnClickListener {
                         break;
                 }
     }
-    //鑾峰彇杈撳叆鏁版嵁鐨勬柟娉?
+    // 获取输入内容
     public String getEditText(){
         return et.getText().toString().trim();
     }
-    //璁剧疆Dialog鐨勫昂瀵稿拰灞忓箷
+    // 设置 Dialog 的尺寸和位置
     public void setDialogSize(){
-        //鑾峰彇褰撳墠绐楀彛瀵硅薄
-        Window window = getWindow();
-        //鑾峰彇绐楀彛瀵硅薄鐨勫弬鏁?
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        //鑾峰彇灞忓箷瀹藉害
-        Display d = window.getWindowManager().getDefaultDisplay();
-        wlp.width = (int)d.getWidth();
-        wlp.gravity = Gravity.BOTTOM;
-        window.setBackgroundDrawableResource(android.R.color.transparent);
-        window.setAttributes(wlp);
+        // 备注弹窗使用统一屏幕适配宽度。
+        ScreenAdapter.applyBottomDialog(this, 0.92f, 360f);
         handler.sendEmptyMessageDelayed(1,100);
 
     }
@@ -90,4 +82,3 @@ public class BeizhuDialog extends Dialog implements View.OnClickListener {
 
 
 }
-

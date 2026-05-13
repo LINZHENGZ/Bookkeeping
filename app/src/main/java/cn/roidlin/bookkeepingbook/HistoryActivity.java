@@ -41,7 +41,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         timeTv = findViewById(R.id.history_tv_time);
 
 
-        //璁剧疆閫傞厤鍣?
+        // 设置适配器
         mDatas = new ArrayList<>();
         adapter = new AccountAdapter(this,mDatas);
         historyLv.setAdapter(adapter);
@@ -80,7 +80,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
                     public void onClick(DialogInterface dialogInterface, int which) {
 
                         UnitAPP.getRepository().deleteAccountById(delId);
-                        mDatas.remove(accountBean); //瀹炴椂鍒锋柊锛屼粠鏁版嵁婧愬垹闄?
+                        mDatas.remove(accountBean); // 实时刷新，并从数据源中删除
                         adapter.notifyDataSetChanged();
 
 
@@ -92,7 +92,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    //鑾峰彇鎸囧畾骞翠唤鏈堜唤鏀舵敮鎯呭喌鐨勫垪琛?
+    // 获取指定年月的收支列表
     private void loadData(int year,int month) {
 
             List<AccountBean> list = UnitAPP.getRepository().getAccountsByMonth(year, month);

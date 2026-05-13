@@ -35,14 +35,14 @@ public class DBManger {
         String sql = "select * from typetb where kind = " + kind;
         Cursor cursor = db.rawQuery(sql,null);
 
-        //寰幆娓告爣
+        // 遍历游标
         while(cursor.moveToNext()){
 
             String typename = cursor.getString(cursor.getColumnIndex("typename"));
-            int imageId = cursor.getInt(cursor.getColumnIndex("imageid"));
-            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
             int kind1= cursor.getInt(cursor.getColumnIndex("kind"));
             int id = cursor.getInt(cursor.getColumnIndex("id"));
+            int imageId = CategoryIconMapper.getNormalIcon(typename, kind1);
+            int sImageId = CategoryIconMapper.getSelectedIcon(typename, kind1);
 
             TypeBean typeBean = new TypeBean(id,typename,imageId,sImageId,kind1);
             list.add(typeBean);
@@ -54,13 +54,14 @@ public class DBManger {
     }
 
     /*
-    * 鍚戣〃閲屾彃鍏ヤ竴鏉″厓绱?
+    * 向表中插入一条记录
     * */
     public static void insertItemToAccounttb(AccountBean bean){
 
         ContentValues values = new ContentValues();
         values.put("typename",bean.getTypename());
-        values.put("sImageId",bean.getsImageId());
+        // 数据库存一份当前图标值，但读取时仍以运行时映射为准，避免资源 ID 漂移。
+        values.put("sImageId", CategoryIconMapper.getSelectedIcon(bean.getTypename(), bean.getKind()));
         values.put("beizhu",bean.getBeizhu());
         values.put("money",bean.getMoney());
         values.put("time",bean.getTime());
@@ -80,16 +81,16 @@ public class DBManger {
         String sql = "select * from accounttb where year=? and month=? and day=? order by id desc";
         Cursor cursor = db.rawQuery(sql, new String[]{year + "", month + "", day + ""});
 
-        //閬嶅巻绗﹀悎瑕佹眰鐨勬瘡涓€琛屾暟鎹?
+        // 遍历符合要求的每一行数据
         while (cursor.moveToNext()) {
 
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String typename = cursor.getString(cursor.getColumnIndex("typename"));
             String beizhu = cursor.getString(cursor.getColumnIndex("beizhu"));
             String time = cursor.getString(cursor.getColumnIndex("time"));
-            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
             int kind = cursor.getInt(cursor.getColumnIndex("kind"));
             float money = cursor.getFloat(cursor.getColumnIndex("money"));
+            int sImageId = CategoryIconMapper.getSelectedIcon(typename, kind);
             AccountBean accountBean = new AccountBean(id, typename, sImageId, beizhu, money, time, year, month, day, kind);
             list.add(accountBean);
 
@@ -100,7 +101,7 @@ public class DBManger {
     }
 
 
-    //鑾峰彇鏌愪竴涓湀鐨勬敹鏀儏鍐?
+    // 获取某个月的收支情况
     @SuppressLint("Range")
     public static List<AccountBean>getAccountListOnemonthFromAccounttb(int year,int month){
 
@@ -108,17 +109,17 @@ public class DBManger {
         String sql = "select * from accounttb where year=? and month=?  order by id desc";
         Cursor cursor = db.rawQuery(sql, new String[]{year + "", month + ""});
 
-        //閬嶅巻绗﹀悎瑕佹眰鐨勬瘡涓€琛屾暟鎹?
+        // 遍历符合要求的每一行数据
         while (cursor.moveToNext()) {
 
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String typename = cursor.getString(cursor.getColumnIndex("typename"));
             String beizhu = cursor.getString(cursor.getColumnIndex("beizhu"));
             String time = cursor.getString(cursor.getColumnIndex("time"));
-            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
             int kind = cursor.getInt(cursor.getColumnIndex("kind"));
             float money = cursor.getFloat(cursor.getColumnIndex("money"));
             int day = cursor.getInt(cursor.getColumnIndex("day"));
+            int sImageId = CategoryIconMapper.getSelectedIcon(typename, kind);
 
             AccountBean accountBean = new AccountBean(id, typename, sImageId, beizhu, money, time, year, month, day, kind);
             list.add(accountBean);
@@ -132,7 +133,7 @@ public class DBManger {
 
 
     /*
-    * 鑾峰彇鏌愪竴澶╃殑鏀嚭鎴栬€呮敹鍏ョ殑鎬婚噾棰?kind:鏀嚭==0, 鏀跺叆==1
+    * 获取某一天的支出或收入总金额，kind: 支出==0，收入==1
     * */
 
     @SuppressLint("Range")
@@ -140,7 +141,7 @@ public class DBManger {
         float total = 0.0f;
         String sql = "select sum(money) from accounttb where year=? and month=? and day=? and kind=?";
         Cursor cursor = db.rawQuery(sql,new String[]{year+"",month+"",day+"",kind+""});
-        //閬嶅巻
+        // 遍历
         if (cursor.moveToFirst()){
 
           float money =  cursor.getFloat(cursor.getColumnIndex("sum(money)"));
@@ -150,13 +151,13 @@ public class DBManger {
     }
 
 
-    //鑾峰彇鏌愪竴涓湀鐨勬敮鍑烘垨鑰呮敹鍏ョ殑鎬婚噾棰?kind:鏀嚭==0, 鏀跺叆==1
+    // 获取某个月的支出或收入总金额，kind: 支出==0，收入==1
     @SuppressLint("Range")
     public static float getSumMoneyMonth(int year, int month, int kind){
         float total = 0.0f;
         String sql = "select sum(money) from accounttb where year=? and month=? and kind=?";
         Cursor cursor = db.rawQuery(sql,new String[]{year+"",month+"",kind+""});
-        //閬嶅巻
+        // 遍历
         if (cursor.moveToFirst()){
 
             float money =  cursor.getFloat(cursor.getColumnIndex("sum(money)"));
@@ -165,13 +166,13 @@ public class DBManger {
         return total;
     }
 
-    //鑾峰彇鏌愪竴骞寸殑鏀嚭鎴栬€呮敹鍏ョ殑鎬婚噾棰?kind:鏀嚭==0, 鏀跺叆==1
+    // 获取某一年的支出或收入总金额，kind: 支出==0，收入==1
     @SuppressLint("Range")
     public static float getSumMoneyYear(int year, int kind){
         float total = 0.0f;
         String sql = "select sum(money) from accounttb where year=? and kind=?";
         Cursor cursor = db.rawQuery(sql,new String[]{year+"",kind+""});
-        //閬嶅巻
+        // 遍历
         if (cursor.moveToFirst()){
 
             float money =  cursor.getFloat(cursor.getColumnIndex("sum(money)"));
@@ -183,7 +184,7 @@ public class DBManger {
 
 
     /*
-    * 鏍规嵁浼犲叆鐨刬d锛屽垹闄ccountdb琛ㄤ腑鐨勪竴鏉℃暟鎹?
+    * 根据传入的 id 删除 accounttb 表中的一条数据
     * */
 
 
@@ -196,7 +197,7 @@ public class DBManger {
 
 
     /**
-     * @description: 鏍规嵁澶囨敞鎼滅储鏀跺叆鎴栬€呮敮鍑虹殑鎯呭喌鍒楄〃
+     * @description: 根据备注搜索收入或支出记录列表
      * @author LINZHENGZ
      * @date 2023/12/26 11:44
      * @version 1.0
@@ -214,9 +215,9 @@ public class DBManger {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String typename = cursor.getString(cursor.getColumnIndex("typename"));
             String time = cursor.getString(cursor.getColumnIndex("time"));
-            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
             int kind = cursor.getInt(cursor.getColumnIndex("kind"));
             float money = cursor.getFloat(cursor.getColumnIndex("money"));
+            int sImageId = CategoryIconMapper.getSelectedIcon(typename, kind);
 
             int year = cursor.getInt(cursor.getColumnIndex("year"));
             int month = cursor.getInt(cursor.getColumnIndex("month"));
@@ -231,7 +232,7 @@ public class DBManger {
     }
 
     /*
-    * 鏌ヨ璁拌处鐨勮〃褰撲腑鏈夊嚑涓勾浠界殑淇℃伅
+    * 查询记账表中有哪些年份信息
     * */
 
     @SuppressLint("Range")
@@ -251,4 +252,3 @@ public class DBManger {
 
 
 }
-

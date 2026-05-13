@@ -14,7 +14,7 @@ public class KeyBoardUtils {
     private EditText editText;
 
     /*
-    * 瀹屾垚浜嬩欢
+    * 完成事件
     * */
     public interface  OnEnsureListener{
          void onEnsure();
@@ -29,10 +29,10 @@ public class KeyBoardUtils {
     public  KeyBoardUtils(KeyboardView keyboardView, EditText editText){
         this.keyboardView = keyboardView;
         this.editText = editText;
-        this.editText.setInputType(InputType.TYPE_NULL);    //鍙栨秷寮瑰嚭绯荤粺閿洏
+        this.editText.setInputType(InputType.TYPE_NULL);    // 取消弹出系统键盘
         k1 = new Keyboard(this.editText.getContext(),R.xml.key);
 
-        this.keyboardView.setKeyboard(k1);                               //璁剧疆瑕佹樉绀洪敭鐩樼殑鏍峰紡
+        this.keyboardView.setKeyboard(k1);                               // 设置要显示的键盘样式
         this.keyboardView.setEnabled(true);
         this.keyboardView.setPreviewEnabled(false);
         this.keyboardView.setOnKeyboardActionListener(listener);
@@ -50,11 +50,11 @@ public class KeyBoardUtils {
 
             @Override
             public void onKey(int primaryCode, int[] keyCodes) {
-                //闇€瑕侀€氳繃璇ユ柟娉曞垽鏂摢涓鐐瑰嚮
+                // 通过该方法判断点击了哪个按键
                 Editable editable = editText.getText();
                 int start = editText.getSelectionStart();
                 switch(primaryCode){
-                    //鐐瑰嚮鍒犻櫎閿?
+                    // 点击删除键
                     case Keyboard.KEYCODE_DELETE:
                     if (editable != null &&editable.length()>0){
                         if (start>0) {
@@ -62,13 +62,13 @@ public class KeyBoardUtils {
                         }
                     }
                         break;
-                    //鐐瑰嚮娓呴浂
+                    // 点击清零
                     case Keyboard.KEYCODE_CANCEL:
                         editable.clear();
                         break;
-                    //鐐瑰嚮瀹屾垚
+                    // 点击完成
                     case Keyboard.KEYCODE_DONE:
-                    //閫氳繃鎺ュ彛鍥炶皟鐨勬柟娉曪紝褰撶偣鍑荤‘瀹氭椂锛屽彲浠ヨ皟鐢ㄨ繖涓柟娉?
+                    // 通过接口回调，在点击确定时执行
                     onEnsureListener.onEnsure();
 
                         break;
@@ -105,14 +105,14 @@ public class KeyBoardUtils {
             }
         };
 
-    //鏄剧ず閿洏
+    // 显示键盘
     public void showKeyboard(){
         int visibility = keyboardView.getVisibility();
         if (visibility == View.INVISIBLE || visibility == View.GONE){
             keyboardView.setVisibility(View.VISIBLE);
         }
     }
-    //闅愯棌閿洏
+    // 隐藏键盘
     public void  hideKeyboard(){
         int visivility = keyboardView.getVisibility();
         if (visivility == View.VISIBLE  || visivility == View.INVISIBLE){
@@ -122,4 +122,3 @@ public class KeyBoardUtils {
 
 
 }
-

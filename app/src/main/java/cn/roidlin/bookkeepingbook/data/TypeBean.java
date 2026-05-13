@@ -8,10 +8,10 @@ package cn.roidlin.bookkeepingbook.data;
 
 public class TypeBean {
                 int id;
-                String typename;        //绫诲瀷鍚嶇О
-                int imageId;                   //鏈閫変腑鍥剧墖
-                int sImageId;                 //琚€変腑鍥剧墖
-                int kind;                           //鏀跺叆-1 鏀嚭-0
+                String typename;        // 类型名称
+                int imageId;                   // 未选中图片
+                int sImageId;                 // 选中图片
+                int kind;                           // 类型：收入 1，支出 0
 
     public TypeBean() {
 
@@ -65,6 +65,5 @@ public class TypeBean {
         this.kind = kind;
     }
 }
-
 
 

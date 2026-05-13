@@ -67,10 +67,10 @@ public class AccountAdapter extends BaseAdapter {
         holder.beizhuTv.setText(bean.getBeizhu());
         holder.moneyTv.setText("RMB: " + bean.getMoney());
 
-        //鍒ゆ柇鏄惁鏄綋鍓嶆椂闂?
+        // 判断是否是当前时间
         if (bean.getYear()==year&&bean.getMonth()==month&&bean.getDay()==day){
             String time = bean.getTime().split(" ")[1];
-            holder.timeTv.setText("浠婂ぉ  "+time);
+            holder.timeTv.setText("今天  "+time);
         }else {
             holder.timeTv.setText(bean.getTime());
         }
@@ -88,4 +88,3 @@ public class AccountAdapter extends BaseAdapter {
             }
     }
 }
-

@@ -71,7 +71,7 @@ public class SelectTimeDialog extends Dialog implements View.OnClickListener {
                     dayStr = "0"+dayofMonth;
                 }
 
-                //鑾峰彇杈撳叆鐨勫皬鏃跺拰鍒嗛挓
+                // 获取输入的小时和分钟
                 String hourStr = hourEt.getText().toString();
                 String minuteStr = minuteEt.getText().toString();
                 int hour = 0;
@@ -142,4 +142,3 @@ public class SelectTimeDialog extends Dialog implements View.OnClickListener {
 
     }
 }
-

@@ -46,14 +46,14 @@ public class TypeBaseAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(context).inflate(R.layout.item_recordfrag_gv,parent,false);
-        //鏌ユ壘甯冨眬涓殑鎺т欢
+        // 查找布局中的控件
         ImageView iv= convertView.findViewById(R.id.item_recordfrag_iv);
         TextView tv = convertView.findViewById(R.id.item_recordfrag_tv);
-        //鑾峰彇鎸囧畾浣嶇疆鐨勬暟鎹簮
+        // 获取指定位置的数据
         TypeBean typeBean = mDatas.get(position);
         tv.setText(typeBean.getTypename());
 
-        //鏃佹褰撳墠浣嶇疆鏄惁涓洪€変腑浣嶇疆
+        // 判断当前位置是否为选中位置
         if (selectPos == position){
             iv.setImageResource(typeBean.getSimageId());
         }else {
@@ -63,4 +63,3 @@ public class TypeBaseAdapter extends BaseAdapter {
         return convertView;
     }
 }
-

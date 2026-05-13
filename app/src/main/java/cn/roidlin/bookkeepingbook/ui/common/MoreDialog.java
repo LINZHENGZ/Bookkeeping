@@ -61,7 +61,7 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
 
             case R.id.dialog_more_btn_about:
 
-                //鍏充簬
+                // 关于
                 intent.setClass(getContext(),AboutActivity.class);
                 getContext().startActivity(intent);
 
@@ -92,16 +92,7 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
     }
 
     public void setDialogSize(){
-        //鑾峰彇褰撳墠绐楀彛瀵硅薄
-        Window window = getWindow();
-        //鑾峰彇绐楀彛瀵硅薄鐨勫弬鏁?
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        //鑾峰彇灞忓箷瀹藉害
-        Display d = window.getWindowManager().getDefaultDisplay();
-        wlp.width = (int)d.getWidth();
-        wlp.gravity = Gravity.BOTTOM;
-        window.setBackgroundDrawableResource(android.R.color.transparent);
-        window.setAttributes(wlp);
+        // 底部弹窗宽度按屏幕百分比控制，并限制在一个合理最大宽度内。
+        ScreenAdapter.applyBottomDialog(this, 0.94f, 420f);
     }
 }
-

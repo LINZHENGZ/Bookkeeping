@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RecordPagerAdater extends FragmentPagerAdapter {
     List<Fragment> fragmentList;
-    String[] titles = {"鏀嚭","鏀跺叆"};
+    String[] titles = {"支出", "收入"};
     public RecordPagerAdater(@NonNull FragmentManager fm,List<Fragment> fragmentList) {
         super(fm);
         this.fragmentList = fragmentList;
@@ -32,4 +32,3 @@ public class RecordPagerAdater extends FragmentPagerAdapter {
         return titles[position];
     }
 }
-

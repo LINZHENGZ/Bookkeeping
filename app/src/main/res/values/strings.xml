@@ -31,4 +31,13 @@
     <string name="account_info">账单详情</string>
     <string name="history_info">本月账单记录</string>
 
+    <string name="tab_home">首页</string>
+    <string name="tab_record">记账</string>
+    <string name="tab_stats">统计</string>
+    <string name="tab_profile">我的</string>
+    <string name="tab_add_record">记一笔..</string>
+    <string name="placeholder_record_desc">这里预留为记账页 Fragment，后续可以接入独立交互。</string>
+    <string name="placeholder_stats_desc">这里预留为统计页 Fragment，后续可以接入图表和分析模块。</string>
+    <string name="placeholder_profile_desc">这里预留为我的页 Fragment，后续可以接入设置和个人信息。</string>
+
 </resources>

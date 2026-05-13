@@ -24,7 +24,7 @@ public class CalendarDialog extends Dialog implements View.OnClickListener {
     List<TextView> hsvViewList;
     List<Integer> yearList;
 
-    int selectPos = -1 ;    //琛ㄧず姝ｅ湪琚偣鍑荤殑骞翠唤鐨勪綅缃?
+    int selectPos = -1 ;    // 表示当前选中的年份位置
     private CalendarAdapter adapter;
     int selectMonth = -1;
 
@@ -55,11 +55,11 @@ public class CalendarDialog extends Dialog implements View.OnClickListener {
         hsvLayout = findViewById(R.id.dialog_calendar_layout);
 
         errorIv.setOnClickListener(this);
-        //鍚戞í鍚戠殑ScrollView 褰撲腑娣诲姞View鐨勬柟娉?
+        // 向横向 ScrollView 中添加 View
         addViewToLayout();
         initGridView();
 
-        //璁剧疆GridView褰撲腑姣忎竴涓猧tem鐨勭偣鍑讳簨浠?
+        // 设置 GridView 每个 item 的点击事件
         setGVListener();
 
     }
@@ -76,7 +76,7 @@ public class CalendarDialog extends Dialog implements View.OnClickListener {
                 int month = i + 1;
                 int year = adapter.year;
 
-                //鑾峰彇鍒拌閫変腑鐨勫勾浠藉拰鏈堜唤
+                // 获取选中的年份和月份
                 onRefreshListener.onRefresh(selectPos,year,month);
                 cancel();
 
@@ -103,22 +103,22 @@ public class CalendarDialog extends Dialog implements View.OnClickListener {
 
     private void addViewToLayout() {
 
-        //灏嗘坊鍔犺繘鍏ョ嚎鎬у竷灞€褰撲腑鐨凾extView杩涜缁熶竴绠＄悊鐨勯泦鍚?
+        // 统一管理添加到线性布局中的 TextView
         hsvViewList = new ArrayList<>();
-        //鑾峰彇鏁版嵁搴撳綋涓瓨鍌ㄤ簡澶氬皯骞翠唤
+        // 获取数据库中存了多少年份
         yearList = UnitAPP.getRepository().getYearList();
-        //濡傛灉鏁版嵁搴撳綋涓病鏈夎褰曪紝灏辨坊鍔犱粖骞寸殑璁板綍
+        // 如果数据库中没有记录，就补上今年
         if (yearList.size() == 0){
             int year = Calendar.getInstance().get(Calendar.YEAR);
             yearList.add(year);
         }
 
-        //閬嶅巻骞翠唤锛屾湁鍑犲勾锛屽氨鍚慡crollView褰撲腑娣诲姞鍑犱釜view
+        // 遍历年份，有几个年份就向 ScrollView 中添加几个 View
         for (int i = 0; i<yearList.size(); i++){
 
             int year = yearList.get(i);
             View view = getLayoutInflater().inflate(R.layout.item_dialogcal_hsv,null);
-            //灏唙iew娣诲姞鍒板竷灞€褰撲腑
+            // 将 View 添加到布局中
             hsvLayout.addView(view);
             TextView hsvTv = view.findViewById(R.id.item_dialogcal_hsv_tv);
             hsvTv.setText(year+"");
@@ -127,7 +127,7 @@ public class CalendarDialog extends Dialog implements View.OnClickListener {
         }
 
         if (selectPos == -1){
-            //璁剧疆褰撳墠琚€変腑鐨勬槸鏈€杩戠殑骞翠唤
+            // 默认选中最近的年份
             selectPos = hsvViewList.size() - 1;
         }
 
@@ -147,7 +147,7 @@ public class CalendarDialog extends Dialog implements View.OnClickListener {
                 public void onClick(View view) {
                     changeTvbg(pos);
                     selectPos = pos;
-                    //鑾峰彇琚€変腑鐨勫勾浠斤紝鐒跺悗涓嬮潰鏄剧ず
+                    // 获取选中的年份并刷新下方月份
                     int year = yearList.get(selectPos);
                     adapter.setYear(year);
 
@@ -160,7 +160,7 @@ public class CalendarDialog extends Dialog implements View.OnClickListener {
 
     }
 
-    //浼犲叆琚€変腑鐨勪綅缃紝鏀瑰彉姝や綅缃笂鐨勮儗鏅拰鏂囧瓧棰滆壊
+    // 根据选中位置更新背景和文字颜色
     private void changeTvbg(int selectPos) {
 
         for (int i = 0; i<hsvViewList.size();i++){
@@ -183,21 +183,12 @@ public class CalendarDialog extends Dialog implements View.OnClickListener {
     }
 
 
-    public void setDialogSize(){
-        //鑾峰彇褰撳墠绐楀彛瀵硅薄
-        Window window = getWindow();
-        //鑾峰彇绐楀彛瀵硅薄鐨勫弬鏁?
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        //鑾峰彇灞忓箷瀹藉害
-        Display d = window.getWindowManager().getDefaultDisplay();
-        wlp.width = (int)d.getWidth();
-        wlp.gravity = Gravity.TOP;
-        window.setBackgroundDrawableResource(android.R.color.transparent);
-        window.setAttributes(wlp);
+        public void setDialogSize(){
+        // 顶部日历弹窗也走统一适配逻辑。
+        ScreenAdapter.applyTopDialog(this, 0.94f, 420f);
     }
 
 
 
 
 }
-

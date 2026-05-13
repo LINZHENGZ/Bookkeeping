@@ -43,10 +43,10 @@ public class SocketDemo extends AppCompatActivity implements View.OnClickListene
 
         Socket socket = new Socket("192.168.2.17",2203);
 
-        //鑾峰彇杈撳嚭娴?
-        OutputStream os = socket.getOutputStream();//瀛楄妭娴佽緭鍑?
-        PrintWriter pw = new PrintWriter(os);//灏嗚緭鍑烘祦鍖呰涓烘墦鍗版祦
-        //鑾峰彇瀹㈡埛绔殑ip鍦板潃
+        // 获取输出流
+        OutputStream os = socket.getOutputStream();// 字节流输出
+        PrintWriter pw = new PrintWriter(os);// 将输出流包装为打印流
+        // 获取客户端 IP 地址
         InetAddress address = InetAddress.getLocalHost();
         String ip = address.getHostAddress();
 

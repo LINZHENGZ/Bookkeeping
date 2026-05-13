@@ -21,8 +21,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     ListView searchLv;
     EditText searchEt;
     TextView emptyTv;
-    List<AccountBean> mDatas;   //鏁版嵁婧?
-    AccountAdapter adapter;     //閫傞厤鍣ㄥ璞?
+    List<AccountBean> mDatas;   // 数据源
+    AccountAdapter adapter;     // 适配器对象
 
 
     @Override
@@ -35,7 +35,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         mDatas = new ArrayList<>();
         adapter = new AccountAdapter(this,mDatas);
         searchLv.setAdapter(adapter);
-        searchLv.setEmptyView(emptyTv);     //璁剧疆鏃犻檺甯冨眬
+        searchLv.setEmptyView(emptyTv);     // 设置空布局
 
     }
 
@@ -63,7 +63,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     return;
                 }
 
-                //寮€濮嬫悳绱?
+                // 开始搜索
                 List<AccountBean> list = UnitAPP.getRepository().searchAccountsByRemark(msg);
 
                 mDatas.clear();
